@@ -1,5 +1,5 @@
 # RPI Locator Python
-A Python implementation of the undocumented / unknown API found at `https://rpilocator.com`
+A Python implementation of the undocumented / unknown API found at `https://rpilocator.com`. When done right, this can allow you to get the drop on Rasberry PI restocks and (hopefully) bypass pesky scalpers. 
 ## Requirements
 ```
 Python 3.0+ w/ pip

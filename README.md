@@ -1,4 +1,9 @@
-# RPI Locator Python
+[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
+[![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+![Maintainer](https://img.shields.io/badge/maintainer-psZachary-blue)
+
+ 
+# RPI Locator Python 
 A Python implementation of the undocumented / unknown API found at `https://rpilocator.com`. When done right, this can allow you to get the drop on Rasberry PI restocks and (hopefully) bypass pesky scalpers. 
 ## Requirements
 ```

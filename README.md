@@ -26,3 +26,12 @@ for item in item_list:
     if item.avail == "Yes":
         print("Item: %s is available at %s %s", item.description, item.sort, item.currency)
 ```
+## Getting Token
+1. Go to https://rpilocator.com
+2. Press `CTRL+SHIFT+I` or open inspect
+3. Click the `Network` tab at the top
+4. Follow the image below
+<br></br>
+![This is an image](https://i.ibb.co/Fgg2djG/token.png)
+
+

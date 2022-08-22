@@ -32,7 +32,7 @@ class RPILocator:
         url = "https://rpilocator.com"
         r = requests.get(url=url)
         local_token = r.text.split("localToken=\"")[1].split("queryFilter=\"\";")[0].split("\";")[0]
-        print(local_token)
+        return local_token
     def GetRPIList(self): 
         url = "https://rpilocator.com/data.cfm?method=getProductTable&token=" + self.token + "&=&_=" + str(int(time.time() * 1000))
         req_cookies = {

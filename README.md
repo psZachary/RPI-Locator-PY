@@ -16,9 +16,9 @@ This implementation of the API provided by `https://rpilocator.com` was created 
 
 ## Example
 ```python
-import rpi_locator
+from rpi_locator import RPILocator
 
-pi_locator = rpi_locator.RPILocator(rpi_locator.GetToken())
+pi_locator = RPILocator(RPILocator.GenToken())
 
 item_list, raw_data = pi_locator.GetRPIList()
 

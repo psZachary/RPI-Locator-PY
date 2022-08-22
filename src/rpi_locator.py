@@ -58,7 +58,6 @@ class RPILocator:
     def GenToken():
         r = RPILocator.__spoof_server_datacall("https://rpilocator.com")
         local_token = r.text.split("localToken=\"")[1].split("queryFilter=\"\";")[0].split("\";")[0]
-
         return local_token
     def GetRPIList(self): 
         r = RPILocator.__spoof_server_datacall("https://rpilocator.com/data.cfm?method=getProductTable&token=" + self.token + "&=&_=" + str(int(time.time() * 1000)))
@@ -68,4 +67,6 @@ class RPILocator:
             last_stock = RPILocatorLastStock(item["last_stock"]["display"], item["last_stock"]["sort"])
             return_list.append(RPILocatorItem(item["vendor"], item["sku"], item["avail"], item["link"], last_stock, item["description"], price))
         return (return_list, r.text)
+    def SetToken(self, token):
+        self.token = token
     

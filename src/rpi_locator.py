@@ -64,7 +64,3 @@ class RPILocator:
             last_stock = RPILocatorLastStock(item["last_stock"]["display"], item["last_stock"]["sort"])
             return_list.append(RPILocatorItem(item["vendor"], item["sku"], item["avail"], item["link"], last_stock, item["description"], price))
         return (return_list, r.text)
-
-
-locator = RPILocator("123")
-locator.GetToken()

@@ -58,7 +58,7 @@ class RPILocator:
     def GenToken():
         r = RPILocator.__spoof_server_datacall("https://rpilocator.com")
         local_token = r.text.split("localToken=\"")[1].split("queryFilter=\"\";")[0].split("\";")[0]
-    
+
         return local_token
     def GetRPIList(self): 
         r = RPILocator.__spoof_server_datacall("https://rpilocator.com/data.cfm?method=getProductTable&token=" + self.token + "&=&_=" + str(int(time.time() * 1000)))

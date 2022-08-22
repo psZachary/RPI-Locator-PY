@@ -1,3 +1,5 @@
+from lib2to3.pgen2 import token
+from tokenize import cookie_re
 import requests
 import time
 
@@ -28,20 +30,14 @@ class RPILocatorItem:
 class RPILocator:
     def __init__(self, token):
         self.token = token
-    def GetToken():
-        url = "https://rpilocator.com"
-        r = requests.get(url=url)
-        local_token = r.text.split("localToken=\"")[1].split("queryFilter=\"\";")[0].split("\";")[0]
-        return local_token
-    def GetRPIList(self): 
-        url = "https://rpilocator.com/data.cfm?method=getProductTable&token=" + self.token + "&=&_=" + str(int(time.time() * 1000))
+    def __spoof_server_datacall(url):
         req_cookies = {
             "CFTOKEN": "0",
             "RPILOCATOR": "0",
-            "CFID": "9cadbbf2-4ec8-4b42-a589-53ced3b6da22",
-            "cfid": "9cadbbf2-4ec8-4b42-a589-53ced3b6da22",
-            "_ga_JWVD0LRP64": "GS1.1.1660878449.1.1.1660880099.0.0.0",
-            "_ga": "GA1.1.2070877416.1660878450"
+            "CFID": "ad2cce9d-63eb-452b-8773-1bc039c01271",
+            "cfid": "ad2cce9d-63eb-452b-8773-1bc039c01271",
+            "_ga_JWVD0LRP64": "GS1.1.1661172752.1.1.1661172766.0.0.0",
+            "_ga": "GA1.1.94991060.1661172766"
         }
         req_headers = {
             "Host": "rpilocator.com",
@@ -58,6 +54,18 @@ class RPILocator:
             "Cache-Control": "no-cache"
         }
         r = requests.get(url, headers=req_headers, cookies=req_cookies)
+        return r
+    def InitializeToken(self):
+        r = RPILocator.__spoof_server_datacall("https://rpilocator.com/data.cfm?method=getAlertFeed&token=" + self.token)
+        return r.text
+    def GenToken():
+        r = RPILocator.__spoof_server_datacall("https://rpilocator.com")
+        local_token = r.text.split("localToken=\"")[1].split("queryFilter=\"\";")[0].split("\";")[0]
+    
+        return local_token
+
+    def GetRPIList(self): 
+        r = RPILocator.__spoof_server_datacall("https://rpilocator.com/data.cfm?method=getProductTable&token=" + self.token + "&=&_=" + str(int(time.time() * 1000)))
         return_list = []
         for item in r.json()["data"]:            
             price = RPILocatorPrice(item["price"]["sort"], item["price"]["currency"], item["price"]["display"])
@@ -65,3 +73,6 @@ class RPILocator:
             return_list.append(RPILocatorItem(item["vendor"], item["sku"], item["avail"], item["link"], last_stock, item["description"], price))
         return (return_list, r.text)
 
+#print(RPILocator.GenToken())
+instance = RPILocator(RPILocator.GenToken())
+print(instance.GetRPIList())

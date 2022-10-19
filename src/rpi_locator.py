@@ -1,5 +1,3 @@
-from lib2to3.pgen2 import token
-from tokenize import cookie_re
 import requests
 import time
 
